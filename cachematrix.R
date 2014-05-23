@@ -24,12 +24,18 @@ makeCacheMatrix <- function(x = matrix()) {
 cacheSolve <- function(x, ...) {
   m<-x$getmatrix()
   if(!is.null(m)){
-    meesage("getting cached data")
+    print("getting cached data")
     return(m)
   }
   matrix<-x$get()
-  m<-solve(matrix, ...)
-  x$setmatrix(m)
-  m
+  if(dim(matrix)[1] != dim(matrix)[2]){
+    print("Passed in matrix is not square matrix. To compute inverse matrix need to be square matrixe. ")
+    NA
+    
+  }else {
+    m<-solve(matrix, ...)
+    x$setmatrix(m)
+    m
+  }
   
 }
